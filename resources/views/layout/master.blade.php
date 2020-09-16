@@ -37,7 +37,7 @@
         @include('layout.header')
         @include('layout.nav')
 
-        @if (Request::is('index'))
+        @if (Request::is('/'))
           @include('layout.jumbotron')
           @include('layout.blocks')      
         @endif
