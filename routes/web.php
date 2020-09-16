@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use App\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,26 +13,15 @@ use App\Post;
 */
 
 
-//GET REQUESTS
-Route::get('/about', function () {
-    return view('about');
+Route::get('/', function() {
+    $posts = App\Post::latest()->published()->get();
+    return view('index', compact('posts'));
 });
-
-Route::get('/contacts', function () {
-    return view('contacts');
-});
-
-Route::get('/admin', function(){
-    return view('admin.index');
-});
-
-Route::get('/', 'PostController@index');
-Route::get('/posts', 'PostController@index');
-Route::get('/posts/create', 'PostController@create');
-Route::get('/posts/{post}', 'PostController@about');
-
 Route::get('/admin/feedbacks', 'FeedbackController@index');
 
-//POST REQUESTS
-Route::post('posts', 'PostController@store');
-Route::post('contacts', 'FeedbackController@store');
+Route::view('/about', 'about');
+Route::view('/contacts', 'contacts');
+Route::view('/admin', 'admin.index');
+
+Route::resource('posts', 'PostController');
+
