@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource('posts', 'PostController');
+
+Route::view('/about', 'about');
+Route::view('/contacts', 'contacts');
+Route::view('/admin', 'admin.index');
 
 Route::get('/', function() {
     $posts = App\Post::latest()->published()->get();
@@ -19,9 +24,4 @@ Route::get('/', function() {
 });
 Route::get('/admin/feedbacks', 'FeedbackController@index');
 
-Route::view('/about', 'about');
-Route::view('/contacts', 'contacts');
-Route::view('/admin', 'admin.index');
-
-Route::resource('posts', 'PostController');
-
+Route::post('/contacts', 'FeedbackController@store');
