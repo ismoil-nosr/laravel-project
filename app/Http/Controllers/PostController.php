@@ -25,15 +25,16 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $attributes = $request->validate([
             'slug' => 'required|unique:posts',
             'title' => 'required|max:100|min:5',
             'short_body' => 'required|max:255|min:10',
-            'full_body' => 'required|min:10'
+            'full_body' => 'required|min:10',
+            'published' => 'nullable'
         ]);
 
-        Post::create($request->all());
-        return redirect('/posts/' . $request->input('slug'));
+        Post::create($attributes);
+        return redirect('/posts/' . $attributes['slug']);
     }
 
     public function edit(Post $post)
@@ -44,10 +45,11 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $attributes = $request->validate([
-            'slug' => 'required|unique:posts',
+            'slug' => 'required|unique:posts,slug,' . $post->id,
             'title' => 'required|max:100|min:5',
             'short_body' => 'required|max:255|min:10',
-            'full_body' => 'required|min:10'
+            'full_body' => 'required|min:10',
+            'published' => 'required'
         ]);
 
         $post->update($attributes);

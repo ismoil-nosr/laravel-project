@@ -3,7 +3,7 @@
 @section('content')
   <div class="col-md-8 blog-main">
     <div class="blog-post">
-      <h2 class="blog-post-title"> {{$post->title}} </h2>
+      <h2 class="blog-post-title"> {{$post->title}} <a href="/posts/{{$post->slug}}/edit" style="font-size:14px">Изменить</a></h2>
       <p class="blog-post-meta"> {{$post->created_at->toFormattedDateString()}} </p>
 
       <p> {{$post->full_body}} </p>
