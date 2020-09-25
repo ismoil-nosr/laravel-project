@@ -6,7 +6,6 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 use App\User;
 use App\Post;
 
-
 class PostPolicy
 {
     use HandlesAuthorization;
@@ -20,7 +19,7 @@ class PostPolicy
     {
         // logic that allows/disallows user create a posts
         // ...
-        
+
         return true;
     }
 }

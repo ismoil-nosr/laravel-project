@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use App\Tag;
 use Illuminate\Http\Request;
+use App\Mail\PostCreated;
 
 class PostsController extends Controller
 {
@@ -58,7 +58,7 @@ class PostsController extends Controller
         $post = Post::create($request->all());
         syncTags($post);
         
-        return redirect('posts/' . $post->slug);
+        return redirect('posts/' . $post->slug)->with('notify', 'Post created successfully!');
     }
 
     /**
@@ -101,8 +101,8 @@ class PostsController extends Controller
         $post->update($request->all());
         syncTags($post);
 
-        //redirect back with status message
-        return redirect('/posts/' . $post->slug . '/edit')->withSuccess('success');
+        //redirect back with message
+        return redirect('/posts/' . $post->slug . '/edit')->with('notify', 'Post updated successfully!');
     }
 
     /**
