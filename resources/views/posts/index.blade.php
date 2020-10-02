@@ -5,7 +5,7 @@
             <h3 class="pb-4 mb-4 font-italic border-bottom">
                 Our blog's posts
                 @can('create', App\Post::class)
-                    <a href="/posts/create">
+                    <a href="/admin/posts/create">
                         <i class="small fas fa-plus-circle text-primary"></i>
                     </a> 
                 @endcan 

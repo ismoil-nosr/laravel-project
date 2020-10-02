@@ -10,16 +10,14 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
+    public function viewAny(User $user)
+    {
+        return true;
+    }
+
     public function update(User $user, Post $post)
     {
         return $post->author_id == $user->id;
     }
 
-    public function create(User $user)
-    {
-        // logic that allows/disallows user create a posts
-        // ...
-
-        return true;
-    }
 }
