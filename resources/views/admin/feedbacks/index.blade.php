@@ -23,15 +23,11 @@
                         <td>{{ $feedback->message }}</td>
                         <td>{{ $feedback->created_at }}</td>
                         <td>
-                            <a href="feedbacks/{{ $feedback->id }}" class="badge badge-danger"
-                                onclick="event.preventDefault();document.getElementById('delete-form').submit();">
-                                Delete
+                            <a href=""
+                               class="delete-item badge badge-danger" 
+                               data-id="{{ $feedback->id }}">
+                               Delete
                             </a>
-
-                            <form id="delete-form" action="/admin/feedbacks/{{ $feedback->id }}" method="POST" class="d-none">
-                                @csrf
-                                @method('DELETE')
-                            </form>
                         </td>
                     </tr>
                 @endforeach

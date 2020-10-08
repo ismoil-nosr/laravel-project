@@ -30,15 +30,11 @@
                         <td>{{ $post->published ? 'yes' : 'no' }}</td>
                         <td>
                             <a href="posts/{{ $post->slug }}/edit" class="badge badge-secondary">Edit</a>
-                            <a href="posts/{{ $post->slug }}" class="badge badge-danger"
-                                onclick="event.preventDefault();document.getElementById('delete-form').submit();">
-                                Delete
+                            <a href=""
+                               class="delete-item badge badge-danger" 
+                               data-id="{{ $post->slug }}">
+                               Delete
                             </a>
-
-                            <form id="delete-form" action="/admin/posts/{{ $post->slug }}" method="POST" class="d-none">
-                                @csrf
-                                @method('DELETE')
-                            </form>
                         </td>
                     </tr>
                 @endforeach

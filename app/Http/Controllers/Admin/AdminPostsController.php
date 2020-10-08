@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use Illuminate\Support\Facades\Session;
 
 class AdminPostsController extends Controller
 {
@@ -88,7 +89,8 @@ class AdminPostsController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect('/admin/posts/')->with('notify', 'Post deleted successfully!');
+        Session::flash('notify', 'Post deleted successfully!'); 
+        return redirect('/admin/posts/');
     }
 
 }

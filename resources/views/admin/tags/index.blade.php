@@ -22,15 +22,11 @@
                         <td>{{ $tag->name }}</td>
                         <td>
                             <a href="tags/{{ $tag->name }}/edit" class="badge badge-secondary">Edit</a>
-                            <a href="" class="badge badge-danger"
-                                onclick="event.preventDefault();document.getElementById('delete-form').submit();">
-                                Delete
+                            <a href=""
+                               class="delete-item badge badge-danger" 
+                               data-id="{{ $tag->name }}">
+                               Delete
                             </a>
-
-                            <form id="delete-form" action="/admin/tags/{{ $tag->name }}" method="POST" class="d-none">
-                                @csrf
-                                @method('DELETE')
-                            </form>
                         </td>
                     </tr>
                 @endforeach

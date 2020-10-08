@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends RegisterController
 {
@@ -82,6 +83,7 @@ class AdminUsersController extends RegisterController
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect('/admin/users/')->with('notify', 'User deleted successfully!');
+        Session::flash('notify', 'User deleted successfully!'); 
+        return redirect('/admin/users/');
     }
 }

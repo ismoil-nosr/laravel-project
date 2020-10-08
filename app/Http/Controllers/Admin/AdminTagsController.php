@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Tag;
+use Illuminate\Support\Facades\Session;
 
 class AdminTagsController extends Controller
 {
@@ -80,6 +81,7 @@ class AdminTagsController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        return redirect('/admin/tags/')->with('notify', 'Tag deleted successfully!');
+        Session::flash('notify', 'Tag deleted successfully!'); 
+        return redirect('/admin/tags/');
     }
 }

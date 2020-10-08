@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Feedback;
+use Illuminate\Support\Facades\Session;
 
 class AdminFeedbacksController extends Controller
 {
@@ -27,6 +28,7 @@ class AdminFeedbacksController extends Controller
     public function destroy(Feedback $feedback)
     {
         $feedback->delete();
-        return redirect('/admin/feedbacks/')->with('notify', 'Feedback deleted successfully!');
+        Session::flash('notify', 'Feedback deleted successfully!'); 
+        return redirect('/admin/feedbacks/');
     }
 }

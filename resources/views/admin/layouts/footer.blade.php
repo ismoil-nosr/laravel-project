@@ -1,9 +1,8 @@
 <!-- Bootstrap core JavaScript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-</script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
     integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
 </script>
@@ -50,4 +49,31 @@
         }
     });
 
+</script>
+
+<script>
+    $('.delete-item').click(function(){
+
+        var item_id = $(this).data('id');
+
+        $.ajax({ 
+            url: window.location.pathname + "/" + item_id,
+            data: {_token: '{!! csrf_token() !!}'},
+            method : "DELETE",
+            success: function(result)
+            {
+                window.location.replace(result);
+            }
+        });
+    });
+</script>
+
+<script>
+    $('#inputGroupSelect01').change(function(){
+        if( $(this).val() == 'custom'){
+            $('#recepients_custom').show();
+        }else{
+            $('#recepients_custom').hide();
+        }
+    });
 </script>

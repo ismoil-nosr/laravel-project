@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\PostCreated;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -12,6 +13,11 @@ class Post extends Model
 
     protected $fillable = ['title', 'body', 'slug', 'author_id', 'published'];
     
+    protected $dispatchesEvents = [
+        'created' => PostCreated::class,
+    ];
+
+
     public function getRouteKeyName()
     {
         return 'slug';

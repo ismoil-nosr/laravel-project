@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Role;
+use Illuminate\Support\Facades\Session;
 
 class AdminRolesController extends Controller
 {
@@ -80,6 +81,7 @@ class AdminRolesController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect('/admin/roles/')->with('notify', 'Role deleted successfully!');
+        Session::flash('notify', 'Role deleted successfully!'); 
+        return redirect('/admin/roles/');
     }
 }

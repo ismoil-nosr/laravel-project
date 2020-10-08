@@ -37,6 +37,12 @@
                     Feedbacks
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/email-spam">
+                    <span data-feather="bar-chart-2"></span>
+                    Spam subscribers
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

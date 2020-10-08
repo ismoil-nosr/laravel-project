@@ -13,6 +13,7 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Role</th>
                     <th>Email verified</th>
                     <th>Registered At</th>
                     <th>Manage</th>
@@ -24,19 +25,16 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>{{ $user->role_type }}</td>
                         <td>{{ $user->email_verified_at }}</td>
                         <td>{{ $user->created_at }}</td>
                         <td>
                             <a href="users/{{ $user->id }}/edit" class="badge badge-secondary">Edit</a>
-                            <a href="" class="badge badge-danger"
-                                onclick="event.preventDefault();document.getElementById('delete-form').submit();">
-                                Delete
+                            <a href=""
+                               class="delete-item badge badge-danger" 
+                               data-id="{{ $user->id }}">
+                               Delete
                             </a>
-
-                            <form id="delete-form" action="/admin/users/{{ $user->id }}" method="POST" class="d-none">
-                                @csrf
-                                @method('DELETE')
-                            </form>
                         </td>
                     </tr>
                 @endforeach

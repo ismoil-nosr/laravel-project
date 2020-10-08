@@ -22,14 +22,11 @@
                         <td>{{ $role->name }}</td>
                         <td>
                             <a href="roles/{{ $role->id }}/edit" class="badge badge-secondary">Edit</a>
-                            <a href="" class="badge badge-danger"
-                                onclick="event.preventDefault();document.getElementById('delete-form').submit();">
-                                Delete
+                            <a href=""
+                               class="delete-item badge badge-danger" 
+                               data-id="{{ $role->id }}">
+                               Delete
                             </a>
-                            <form id="delete-form" action="/admin/roles/{{ $role->id }}" method="POST" class="d-none">
-                                @csrf
-                                @method('DELETE')
-                            </form>
                         </td>
                     </tr>
                 @endforeach
