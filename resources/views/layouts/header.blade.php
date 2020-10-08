@@ -5,7 +5,7 @@
             <a class="text-muted" href="#">Subscribe</a>
         </div>
         <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="#">{{ config('app.name', 'Laravel Blog') }}</a>
+            <a class="blog-header-logo text-dark" href="/">{{ config('app.name', 'Laravel Blog') }}</a>
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center">
             <a class="text-muted" href="#" aria-label="Search">
@@ -22,8 +22,11 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/admin">Adminstration</a>
-                    <div class="dropdown-divider"></div>
+                    @admin
+                        <a class="dropdown-item" href="/admin">Adminstration</a>
+                        <div class="dropdown-divider"></div>
+                    @endadmin
+
                     <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">

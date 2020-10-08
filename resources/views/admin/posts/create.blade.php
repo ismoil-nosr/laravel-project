@@ -1,8 +1,16 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
+
 <div class="col-md-8">
-    <form action="/posts" method="POST">
+    <h2>
+        <a href="/admin/posts">
+            <i class="small fas fa-arrow-circle-left text-primary"></i>
+        </a>
+        Create post
+    </h2>
+
+    <form action="/admin/posts" method="POST">
         @csrf
 
         @if ($errors->count())

@@ -20,8 +20,10 @@ class Tag extends Model
 
     public static function tagsCloud()
     {
-        // $tags = (new Post)->with('tags')->get()->pluck('tags')->flatten()->unique('name');
-        $tags = Tag::has('posts')->orderBy('name')->get();
+        $tags = Tag::whereHas('posts', function($q) {
+            $q->where('published', true);
+        })->get();
+
         return $tags;
     }
 }

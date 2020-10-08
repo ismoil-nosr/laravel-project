@@ -6,7 +6,7 @@
         <h2 class="blog-post-title">
             {{ $post->title }}
             @can('update', $post)
-                <a class="small" href="/posts/{{ $post->slug }}/edit"><i class="far fa-edit"></i></a> 
+                <a class="small" href="/admin/posts/{{ $post->slug }}/edit"><i class="far fa-edit"></i></a> 
             @endcan
         </h2>
         <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }}</p>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
-use App\Mail\PostCreated;
 
 class PostsController extends Controller
 {
@@ -15,7 +14,7 @@ class PostsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['can:update,post'])->except(['index', 'store', 'create', 'show']);
+        $this->middleware('admin')->except(['index', 'show']);
     }
 
     /**
@@ -30,38 +29,6 @@ class PostsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('posts.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|min:3|max:50',
-            'body' => 'required|min:3|max:550',
-            'slug' => 'nullable|min:2|max:50',
-        ]);
-
-        $request->request->add(['author_id' => $request->user()->id]);
-
-        $post = Post::create($request->all());
-        syncTags($post);
-        
-        return redirect('posts/' . $post->slug)->with('notify', 'Post created successfully!');
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Post  $post
@@ -70,50 +37,5 @@ class PostsController extends Controller
     public function show(Post $post)
     {
         return view('posts.show', compact('post'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        return view('posts.edit', compact('post'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
-    {
-        $request->validate([
-            'title' => 'required|min:3|max:50',
-            'body' => 'required|min:3|max:550',
-            'slug' => 'min:2|max:50',
-        ]);
-
-        $post->update($request->all());
-        syncTags($post);
-
-        //redirect back with message
-        return redirect('/posts/' . $post->slug . '/edit')->with('notify', 'Post updated successfully!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post)
-    {
-        $post->delete();
-        return redirect('/posts');
     }
 }
