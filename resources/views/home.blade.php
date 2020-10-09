@@ -11,8 +11,7 @@
         @endforeach
 
         <nav class="blog-pagination">
-            <a class="btn btn-outline-primary" href="#">Older</a>
-            <a class="btn btn-outline-secondary" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+            <a class="btn btn-outline-primary" href="/posts">More</a>
         </nav>
 
     </div><!-- /.blog-main -->

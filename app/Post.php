@@ -48,11 +48,6 @@ class Post extends Model
             ->doNotGenerateSlugsOnUpdate();
     }
     
-    public static function getLatestPublished()
-    {
-        return (new static)->published()->latest()->get();
-    }
-
     public function scopePublished($query)
     {
         return $query->where('published', true);

@@ -14,5 +14,7 @@
             @foreach ($posts as $post)
                 @include('posts.layout')
             @endforeach
+            
+            {{ $posts->links() }}
         </div>
 @endsection

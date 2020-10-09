@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -39,5 +40,7 @@ class AppServiceProvider extends ServiceProvider
             }
             return false;
         });
+
+        LengthAwarePaginator::defaultView('pagination::bootstrap-4');
     }
 }
