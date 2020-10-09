@@ -4,6 +4,7 @@ namespace App;
 
 use App\Events\PostCreated;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -17,6 +18,18 @@ class Post extends Model
         'created' => PostCreated::class,
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function(Post $post) {
+            $after = $post->getDirty();
+            $post->history()->attach(auth()->id(), [
+                'before' => json_encode(Arr::only($post->fresh()->toArray(), array_keys($after))),
+                'after' => json_encode($after)
+            ]);
+        });
+    }
 
     public function getRouteKeyName()
     {
@@ -57,6 +70,13 @@ class Post extends Model
 
     public function author()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function history()
+    {
+        return $this->belongsToMany(User::class, 'post_histories')
+             ->withPivot(['before', 'after'])
+             ->withTimestamps();
     }
 }
