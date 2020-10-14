@@ -13,16 +13,13 @@ class CreatePostTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_tag', function (Blueprint $table) {
-            $table->foreignId('post_id')
-                  ->constrained('posts')
-                  ->onDelete('cascade');
-
+        Schema::create('taggables', function (Blueprint $table) {
             $table->foreignId('tag_id')
                   ->constrained('tags')
                   ->onDelete('cascade');
 
-            $table->primary(['post_id', 'tag_id']);	
+            $table->morphs('taggable');
+            $table->primary(['tag_id', 'taggable_id', 'taggable_type']);	
         });
     }
 
@@ -33,6 +30,6 @@ class CreatePostTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_tag');
+        Schema::dropIfExists('taggables');
     }
 }

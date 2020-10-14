@@ -25,7 +25,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $post->title }}</td>
                         <td>{{ \Illuminate\Support\Str::limit($post->body, 50, $end = '...') }}</td>
-                        <td>{{ $post->tags->pluck('name')->implode(', ') }}</td>
+                        <td>{{ $post->tags()->pluck('name')->implode(', ') }}</td>
                         <td>{{ $post->created_at }}</td>
                         <td>{{ $post->published ? 'yes' : 'no' }}</td>
                         <td>

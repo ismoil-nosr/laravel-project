@@ -25,8 +25,8 @@ class Post extends Model
         static::updating(function(Post $post) {
             $after = $post->getDirty();
             $post->history()->attach(auth()->id(), [
-                'before' => json_encode(Arr::only($post->fresh()->toArray(), array_keys($after))),
-                'after' => json_encode($after)
+                'before' => json_encode(Arr::only($post->fresh()->toArray(), array_keys($after)), JSON_UNESCAPED_UNICODE),
+                'after' => json_encode($after, JSON_UNESCAPED_UNICODE)
             ]);
         });
     }
@@ -47,7 +47,7 @@ class Post extends Model
             ->slugsShouldBeNoLongerThan(50)
             ->doNotGenerateSlugsOnUpdate();
     }
-    
+
     public function scopePublished($query)
     {
         return $query->where('published', true);
@@ -60,7 +60,7 @@ class Post extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'post_tag');
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     public function author()

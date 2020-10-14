@@ -15,7 +15,7 @@ class Tag extends Model
 
     public function posts()
     {
-        return $this->belongsToMany(Post::class, 'post_tag');
+        return $this->morphedByMany(Post::class, 'taggable');
     }
 
     public static function tagsCloud()

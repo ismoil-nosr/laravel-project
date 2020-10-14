@@ -55,7 +55,7 @@ class AdminPostsController extends Controller
         $post = Post::create($request->all());
         syncTags($post);
         
-        return redirect('/admin/posts/' . $post->slug . '/edit')->with('notify', 'Post created successfully!');
+        return redirect('/posts/' . $post->slug)->with('notify', 'Post created successfully!');
     }
 
     /**
@@ -77,7 +77,7 @@ class AdminPostsController extends Controller
         syncTags($post);
 
         //redirect back with message
-        return redirect('/admin/posts/' . $post->slug . '/edit')->with('notify', 'Post updated successfully!');
+        return redirect('/posts/' . $post->slug)->with('notify', 'Post updated successfully!');
     }
 
     /**
