@@ -74,4 +74,9 @@ class Post extends Model
              ->withPivot(['before', 'after'])
              ->withTimestamps();
     }
+    
+    public function comments()
+    {
+        return $this->morphToMany(Comment::class, 'commentable');
+    }
 }

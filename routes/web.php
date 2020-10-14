@@ -92,7 +92,7 @@ Route::group(['prefix' => 'posts'], function()
     Route::GET('/', 'PostsController@index');
     Route::GET('{post}', 'PostsController@show');
     Route::GET('tags/{tag}', 'TagsController@index');
-
+    Route::POST('{post}/comment', 'CommentController@store');
 });
 
 
