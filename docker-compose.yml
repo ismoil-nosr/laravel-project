@@ -1,32 +1,22 @@
 version: "3"
 
 services:
-   db_node_domain:
-     image: mysql:5.7
-     volumes:
-       - db_data:/var/lib/mysql
-     restart: always
-     environment:
-       MYSQL_ROOT_PASSWORD: password
-       MYSQL_DATABASE: laravel_blog
-       MYSQL_USER: laravel
-       MYSQL_PASSWORD: password
-     container_name: laravel_db
-
    laravel_blog:
      build:
        context: .
        dockerfile: ./.deploy/Dockerfile
-     depends_on:
-       - db_node_domain
      expose:
        - 80
      restart: always
      environment:
        VIRTUAL_HOST: blog.laravel
-       DB_HOST: db_node_domain:3306
-       DB_USER: laravel
+       APP_ENV: development
+       DB_CONNECTION: mysql
+       DB_HOST: db_node_domain
+       DB_PORT: 3306
+       DB_USERNAME: laravel
        DB_PASSWORD: password
+       DB_DATABASE: laravel_todo
      container_name: laravel_blog
 volumes:
     db_data:
